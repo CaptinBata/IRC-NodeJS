@@ -17,6 +17,9 @@
       %>
         <%- list %>
     </ul>
+    <form id="formSendMessage" name="sendmessage" method="post" action="irc/sendmessage">
+        <input id="inputMessage" type="text" placeholder="Enter a message here" name="message" />
+        <button id="btnSubmit" type="submit">Submit</button>
 </body>
 
 </html>

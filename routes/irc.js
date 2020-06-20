@@ -4,11 +4,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  req.count = req.count + 1;
-  req.messagesList.push(new messageStructure(new Date(Date.now()), `Message ${req.count}`, "Nyk", "Someone").getMessage())
   res.render('irc', {
-    "messagesList": req.messagesList
+    "messagesList": req.messagesList,
   });
+});
+
+router.post('/sendmessage', function (req, res, next) {
+  var message = req.body.message;
+  req.messagesList.push(new messageStructure(new Date(Date.now()), message, req.username, "#test-channel").getMessage())
+  req.ircClient.say("#test-channel", message)
+  res.redirect('/irc')
 });
 
 module.exports = router;
