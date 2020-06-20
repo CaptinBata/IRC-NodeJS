@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IRC</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>Messages</h1>
+    <ul>
+        <%
+        var list = '';
+        for (i = 0; i < messagesList.length; i++) {
+          list += '<li>' + messagesList[i].Date + ' - ' + messagesList[i].From + ': ' +  messagesList[i].Message + '</li>';
+        }
+      %>
+        <%- list %>
+    </ul>
+</body>
+
+</html>

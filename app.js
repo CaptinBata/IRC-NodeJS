@@ -6,6 +6,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
+var ircRouter = require('./routes/irc');
+var irc = require("irc")
+var messageStructure = require("./public/javascripts/messageStructure")
+let messagesList = [new messageStructure(new Date(Date.now()), "Test1", "Nyk1", "Someone1").getMessage()];
+let ircClient = new irc.Client()
 
 var app = express();
 
@@ -19,16 +24,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function (req, res, next) {
+  req.count = 0;
+  req.messagesList = messagesList;
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
+app.use('/irc', ircRouter);
+
+ircClient.addListener("message", function (from, to, message) {
+  messagesList.push(new messageStructure(new Date(Date.now()), message, from, to).getMessage())
+  ircRouter.handle(req, res, next)
+})
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
