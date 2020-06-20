@@ -1,0 +1,3 @@
+[submodule "irc_chat_server"]
+	path = irc_chat_server
+	url = https://github.com/Tali-T/irc_chat_server
