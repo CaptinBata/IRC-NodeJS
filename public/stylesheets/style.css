@@ -2,7 +2,25 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+::-webkit-scrollbar {
+  display: none;
+}
+#divMessages ul li {
+  display: block;
+  float: top;
+  height: auto;
+  list-style-position: outside;
+  margin-right: 20px;
+}
+#colMessages{
+  background-color: lightgray;
+}#divMessages ul li:hover {
+  background-color: lightpink;
+}
 
-a {
-  color: #00B7FF;
+#divMessages li:nth-child(odd) {
+  background-color: gainsboro;
+}
+#divMessages li:nth-child(even) {
+  background-color: #eaeaea;
 }
