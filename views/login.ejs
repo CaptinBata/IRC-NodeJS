@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRC - ¿ Login</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
@@ -10,37 +11,31 @@
 <body>
   <div class="col-md-5"></div>
   <div id="divLogin" class="col-md-2">
-    <form id="formUserName" name="sendmessage" method="post" action="irc/sendmessage">
-        <input id="inputUserName" type="text" Class="form-control" autocomplete="off"
-        placeholder="Enter UserName" name="message" />
-    </form>
-    <form id="formPassword" name="sendmessage" method="post" action="irc/sendmessage">
-        <input id="inputPassword" type="text" Class="form-control" autocomplete="off"
-        placeholder="Enter Password" name="message" />
-    </form>
-
-    <button id="btnLogin" style="width: 100px; margin-bottom: 10px;" onclick="Login()" class="btn btn-default">Login</button>
+    <form id="formLogin" name="login" method="post" autocomplete="off" action="/login/authenticate">
+        <input id="inputUserName" type="text" Class="form-control" 
+        placeholder="Enter UserName" name="username" />
+        <input id="inputPassword" type="password" Class="form-control" 
+        placeholder="Enter Password" name="password" />
+    <input type="checkbox" onclick="showPassword()"/>
+    <label style="font-size: 12px; opacity: 70%;" >Show Password</label>
+    <br/>
+    <button id="btnLogin" style="width: 100px; margin-bottom: 10px;" class="btn btn-default">Login</button>
+    <% if (failed) {  %>
+      document.getElementById("btnLogin").style.color = "red";
+        <script>
+        document.getElementById("btnLogin").textContent = "Login Failed";
+        console.log("I Ran")
+      </script>
+      <% } %>
+  </form>
     <!-- <p onclick="myFunction(this, 'red')">test</p> -->
   </div>
   <script>
     //document.getElementById("btnLogin").onclick = function() {Login()};
-  
-    function Login()
-    {
-      document.getElementById("btnLogin").style.color = "red";
-        //res.redirect('/irc')
-        var txtUserName = document.getElementById("inputUserName").value;
-        var txtPassword = document.getElementById("inputPassword").value;
-        if (txtUserName == 'nyk' & txtPassword == 'test')
-        {
-          window.location.href="irc";
-          //document.getElementById("inputPassword").value = text1;
-          //res.redirect('irc.ejs');          
-        }
-        //res.redirect('/irc');
-        
-  
-    } 
+    function showPassword() {
+      const passwordInput = document.getElementById("inputPassword");
+      passwordInput.type = passwordInput.type === "text" ? 'password' : 'text';
+    }
     // function myFunction(elmnt,clr) {
     //   //res.redirect('/irc')
     //   elmnt.style.color = clr;
