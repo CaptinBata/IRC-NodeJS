@@ -7,8 +7,11 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var ircRouter = require('./routes/irc');
-var MessageStructure = require("./public/javascripts/messageStructure")
+var MessageStructure = require("./public/javascripts/messageStructure");
+const IRC = require('./public/javascripts/ircClient');
+const IRCClient = require('./public/javascripts/ircClient');
 
+let ircClient = new IRC("ws://82.13.124.97");
 let messagesList = [new MessageStructure(new Date(Date.now()), "Test1", "Nyk1", "Someone1").getMessage()];
 let username = "Nyk"
 
@@ -25,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
+  req.ircClient = ircClient;
   req.messagesList = messagesList;
   req.username = username
   next();
