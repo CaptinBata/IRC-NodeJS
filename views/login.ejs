@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <div class="col-md-5"></div>
+  <div id="divLogin" class="col-md-2">
+    <form id="formUserName" name="sendmessage" method="post" action="irc/sendmessage">
+        <input id="inputUserName" type="text" Class="form-control" autocomplete="off"
+        placeholder="Enter UserName" name="message" />
+    </form>
+    <form id="formPassword" name="sendmessage" method="post" action="irc/sendmessage">
+        <input id="inputPassword" type="text" Class="form-control" autocomplete="off"
+        placeholder="Enter Password" name="message" />
+    </form>
+
+    <button id="btnSubmit" style="width: 100px; margin-bottom: 10px;" type="submit" onclick="Login()" class="btn btn-default">Submit</button>
+    <p onclick="myFunction(this, 'red')">test</p>
+  </div>
+    <script>
+        function Login()
+        {
+            res.redirect('/irc')
+            // if (document.getElementById("inputUserName").textContent==test)
+            // {
+            //     return res.redirect('/irc');
+            // }
+        }    
+    </script>
+<script>
+    function myFunction(elmnt,clr) {res.redirect('/irc')
+      elmnt.style.color = clr;
+      
+    }
+    </script>
+</body>
+
+</html>

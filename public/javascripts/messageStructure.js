@@ -7,8 +7,9 @@ class messageStructure {
     }
 
     getMessage() {
+        let test = new Date(this.MessageDate).toUTCString()
         return {
-            "Date": this.MessageDate.toLocaleString(),
+            "Date": this.MessageDate.toUTCString(),
             "Message": this.Message,
             "From": this.Sender,
             "To": this.Recepient

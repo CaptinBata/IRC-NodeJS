@@ -11,13 +11,14 @@
   <div class="col-md-4"></div>
   <div id="colMessages" class="col-md-4">
     <div id="divMessages" class="row-md-4">
-      <h1>Messages</h1>
+      <h1 style="text-align: center;">Messages</h1>
       <ul style="width: auto; height: 750px; overflow: auto">
         <%
         var list = '';
         for (i = 0; i < messagesList.length; i++) {
-          list += '<li>' +'<div class="row-md-4" style="font-size: 10px;">' + messagesList[i].Date + ' - ' + messagesList[i].From + ': ' +
-            '</div>'+'<div class="row-md-4">' +  messagesList[i].Message + '</div>'+'</li>';
+          list += '<li>' +'<div class="row-md-4">' + '<label style="font-size: 20px; color:crimson;" >' + messagesList[i].From + '</label>' + ' - ' + 
+            '<label style="font-size: 10px; opacity: 70%;" >' + messagesList[i].Date + '</label>' +'</div>'
+            +'<div class="row-md-4" style="font-size: 20px;">' + '<label style="font-size: 20px;" >' +  messagesList[i].Message + '</label>' + '</div>'+'</li>';
         }
         %>
         <%- list %>
@@ -30,7 +31,7 @@
             placeholder="Enter a message here" name="message" /></form>
       </div>
       <div class="col-md-1">
-        <button id="btnSubmit" style="width: 100px;" type="submit" class="btn btn-default">Submit</button>
+        <button id="btnSubmit" style="width: 100px; margin-bottom: 10px;" type="submit" class="btn btn-default">Submit</button>
       </div>
     </div>
   </div>

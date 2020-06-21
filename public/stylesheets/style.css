@@ -14,7 +14,8 @@ body {
 }
 #colMessages{
   background-color: lightgray;
-}#divMessages ul li:hover {
+}
+#divMessages ul li:hover {
   background-color: lightpink;
 }
 
@@ -23,4 +24,12 @@ body {
 }
 #divMessages li:nth-child(even) {
   background-color: #eaeaea;
+}
+
+#divLogin{
+  background-color: lightgray;
+  display: block;
+  float: top;
+  height: auto;
+  padding: 10px;
 }
