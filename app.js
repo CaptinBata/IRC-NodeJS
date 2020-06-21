@@ -11,7 +11,7 @@ var irc = require("irc")
 var MessageStructure = require("./public/javascripts/messageStructure")
 
 let messagesList = [new MessageStructure(new Date(Date.now()), "Test1", "Nyk1", "Someone1").getMessage()];
-let ircClient = new irc.Client("82.13.124.97:6667", "Nyk", { channels: ['#test-channel'] })
+let ircClient = new irc.Client('82.13.124.97:6667', 'Nyk', { channels: ['#test-channel'] })
 let username = "Nyk"
 
 var app = express();
@@ -37,12 +37,20 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/irc', ircRouter);
 
+ircClient.addListener('error', function(message) {
+  console.error('ERROR: %s: %s', message.command, message.args.join(' '));
+});
+
+ircClient.addListener('join', function(channel, who) {
+  console.log('%s has joined %s', who, channel);
+});
+
 ircClient.addListener("message", function (from, to, message) {
   let newMessage = new MessageStructure(new Date(Date.now()), message, from, to).getMessage()
   console.log(newMessage);
   messagesList.push(newMessage)
   ircRouter.handle(req, res, next)
-})
+});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
