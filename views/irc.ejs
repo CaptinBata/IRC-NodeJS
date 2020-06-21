@@ -2,24 +2,41 @@
 <html>
 
 <head>
-    <title>IRC</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title>IRC</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
 <body>
-    <h1>Messages</h1>
-    <ul>
+  <div class="col-md-4"></div>
+  <div id="colMessages" class="col-md-4">
+    <div id="divMessages" class="row-md-4">
+      <h1 style="text-align: center;">Messages</h1>
+      <ul style="width: auto; height: 750px; overflow: auto">
         <%
         var list = '';
         for (i = 0; i < messagesList.length; i++) {
-          list += '<li>' + messagesList[i].Date + ' - ' + messagesList[i].From + ': ' +  messagesList[i].Message + '</li>';
+          list += '<li>' +'<div class="row-md-4">' + '<label style="font-size: 20px; color:crimson;" >' + messagesList[i].From + '</label>' + ' - ' + 
+            '<label style="font-size: 10px; opacity: 70%;" >' + messagesList[i].Date + '</label>' +'</div>'
+            +'<div class="row-md-4" style="font-size: 20px;">' + '<label style="font-size: 20px;" >' +  messagesList[i].Message + '</label>' + '</div>'+'</li>';
         }
-      %>
+        %>
         <%- list %>
-    </ul>
-    <form id="formSendMessage" name="sendmessage" method="post" action="irc/sendmessage">
-        <input id="inputMessage" type="text" placeholder="Enter a message here" name="message" />
-        <button id="btnSubmit" type="submit">Submit</button>
+      </ul>
+    </div>
+    <div class="row-md-4">
+      <div class="col-md-10">
+        <form id="formSendMessage" name="sendmessage" method="post" action="irc/sendmessage">
+          <input id="inputMessage" type="text" Class="form-control" autocomplete="off"
+            placeholder="Enter a message here" name="message" />
+      </div>
+      <div class="col-md-1">
+        <button id="btnSubmit" style="width: 100px; margin-bottom: 10px;" type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
 
 </html>
