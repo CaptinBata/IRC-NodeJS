@@ -21,10 +21,9 @@
     <br/>
     <button id="btnLogin" style="width: 100px; margin-bottom: 10px;" class="btn btn-default">Login</button>
     <% if (failed) {  %>
-      document.getElementById("btnLogin").style.color = "red";
         <script>
+        document.getElementById("btnLogin").style.color = "red";
         document.getElementById("btnLogin").textContent = "Login Failed";
-        console.log("I Ran")
       </script>
       <% } %>
   </form>

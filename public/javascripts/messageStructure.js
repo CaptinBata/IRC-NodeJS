@@ -1,4 +1,4 @@
-class messageStructure {
+class MessageStructure {
     constructor(date, message, from, recepient) {
         this.MessageDate = date;
         this.Message = message;
@@ -17,4 +17,4 @@ class messageStructure {
     }
 }
 
-module.exports = messageStructure
+module.exports = MessageStructure
