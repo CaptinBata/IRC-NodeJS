@@ -7,7 +7,6 @@ class MessageStructure {
     }
 
     getMessage() {
-        //let test = new Date(this.MessageDate).toUTCString()
         return {
             "Date": this.MessageDate.toUTCString(),
             "Message": this.Message,
