@@ -19,25 +19,36 @@
         placeholder="Enter Password" name="message" />
     </form>
 
-    <button id="btnSubmit" style="width: 100px; margin-bottom: 10px;" type="submit" onclick="Login()" class="btn btn-default">Submit</button>
-    <p onclick="myFunction(this, 'red')">test</p>
+    <button id="btnLogin" style="width: 100px; margin-bottom: 10px;" onclick="Login()" class="btn btn-default">Login</button>
+    <!-- <p onclick="myFunction(this, 'red')">test</p> -->
   </div>
-    <script>
-        function Login()
+  <script>
+    //document.getElementById("btnLogin").onclick = function() {Login()};
+  
+    function Login()
+    {
+      document.getElementById("btnLogin").style.color = "red";
+        //res.redirect('/irc')
+        var txtUserName = document.getElementById("inputUserName").value;
+        var txtPassword = document.getElementById("inputPassword").value;
+        if (txtUserName == 'nyk' & txtPassword == 'test')
         {
-            res.redirect('/irc')
-            // if (document.getElementById("inputUserName").textContent==test)
-            // {
-            //     return res.redirect('/irc');
-            // }
-        }    
-    </script>
-<script>
-    function myFunction(elmnt,clr) {res.redirect('/irc')
-      elmnt.style.color = clr;
+          window.location.href="irc";
+          //document.getElementById("inputPassword").value = text1;
+          //res.redirect('irc.ejs');          
+        }
+        //res.redirect('/irc');
+        
+  
+    } 
+    // function myFunction(elmnt,clr) {
+    //   //res.redirect('/irc')
+    //   elmnt.style.color = clr;
       
-    }
+    // }  
+  
     </script>
+
 </body>
 
 </html>
