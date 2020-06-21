@@ -16,14 +16,14 @@
         placeholder="Enter UserName" name="username" />
         <input id="inputPassword" type="password" Class="form-control" 
         placeholder="Enter Password" name="password" />
-    <input type="checkbox" onclick="showPassword()"/>
+    <input id="chkShowPassword" type="checkbox" onclick="showPassword()"/>
     <label style="font-size: 12px; opacity: 70%;" >Show Password</label>
     <br/>
     <button id="btnLogin" style="width: 100px; margin-bottom: 10px;" class="btn btn-default">Login</button>
     <% if (failed) {  %>
-      document.getElementById("btnLogin").style.color = "red";
         <script>
-        document.getElementById("btnLogin").textContent = "Login Failed";
+        document.getElementById("btnLogin").style.color = "red";
+        document.getElementById("btnLogin").value = "Login Failed";
         console.log("I Ran")
       </script>
       <% } %>
@@ -31,8 +31,22 @@
     <!-- <p onclick="myFunction(this, 'red')">test</p> -->
   </div>
   <script>
-    //document.getElementById("btnLogin").onclick = function() {Login()};
-    function showPassword() {
+    function autofillUsername() 
+    {
+      document.getElementById('inputUserName').value = "nyk";    
+      
+    }
+    document.getElementById('inputUserName').onclick = autofillUsername;
+
+    function autofillPassword() 
+    {
+      document.getElementById('inputPassword').value = "test";    
+      
+    }
+    document.getElementById('inputPassword').onclick = autofillPassword;  
+
+    function showPassword() 
+    {
       const passwordInput = document.getElementById("inputPassword");
       passwordInput.type = passwordInput.type === "text" ? 'password' : 'text';
     }
@@ -40,7 +54,9 @@
     //   //res.redirect('/irc')
     //   elmnt.style.color = clr;
       
-    // }  
+    // } 
+    
+    
   
     </script>
 

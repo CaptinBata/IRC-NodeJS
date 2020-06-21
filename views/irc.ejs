@@ -12,7 +12,7 @@
   <div id="colMessages" class="col-md-4">
     <div id="divMessages" class="row-md-4">
       <h1 style="text-align: center;">Messages</h1>
-      <ul style="width: auto; height: 750px; overflow: auto">
+      <ul id="listMessages" style="width: auto; height: 750px; overflow: auto">
         <%
         for (const message of messagesList) {
         %>
@@ -32,7 +32,36 @@
       </div>
     </div>
   </div>
+  <script>
 
+    //Highlight message with click
+    const ul = document.getElementById("listMessages");
+    const listItems = ul.getElementsByTagName("li");
+    //const messageDiv = [];
+    for(li of  listItems)
+    {
+      for(divs of li.getElementsByTagName("div"))
+      {
+        if(divs.getAttribute("id") == "divSentMessage")
+        {
+          divs.onclick = highlightList;
+        }
+      }
+      
+    }
+
+    function highlightList()
+      {
+        if(this.classList.contains('active'))
+        {
+          this.classList.remove("active");
+        } 
+        else 
+        {
+          this.classList.add("active");
+        }
+      }
+  </script>
 </body>
 
 </html>
