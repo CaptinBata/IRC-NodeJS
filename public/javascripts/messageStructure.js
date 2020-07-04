@@ -1,4 +1,4 @@
-class messageStructure {
+class MessageStructure {
     constructor(date, message, from, recepient) {
         this.MessageDate = date;
         this.Message = message;
@@ -7,7 +7,6 @@ class messageStructure {
     }
 
     getMessage() {
-        //let test = new Date(this.MessageDate).toUTCString()
         return {
             "Date": this.MessageDate.toUTCString(),
             "Message": this.Message,
@@ -17,4 +16,4 @@ class messageStructure {
     }
 }
 
-module.exports = messageStructure
+module.exports = MessageStructure

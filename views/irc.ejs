@@ -14,20 +14,16 @@
       <h1 style="text-align: center;">Messages</h1>
       <ul style="width: auto; height: 750px; overflow: auto">
         <%
-        var list = '';
-        for (i = 0; i < messagesList.length; i++) {
-          list += '<li>' +'<div class="row-md-4">' + '<label style="font-size: 20px; color:crimson;" >' + messagesList[i].From + '</label>' + ' - ' + 
-            '<label style="font-size: 10px; opacity: 70%;" >' + messagesList[i].Date + '</label>' +'</div>'
-            +'<div class="row-md-4" style="font-size: 20px;">' + '<label style="font-size: 20px;" >' +  messagesList[i].Message + '</label>' + '</div>'+'</li>';
-        }
+        for (const message of messagesList) {
         %>
-        <%- list %>
+        <%- include('partials/message', { message }); %>
+        <% } %>
       </ul>
     </div>
     <div class="row-md-4">
       <div class="col-md-10">
         <form id="formSendMessage" name="sendmessage" method="post" action="irc/sendmessage">
-          <input id="inputMessage" type="text" Class="form-control" autocomplete="off"
+          <input id="inputMessage" type="text" class="form-control" autocomplete="off"
             placeholder="Enter a message here" name="message" />
       </div>
       <div class="col-md-1">
