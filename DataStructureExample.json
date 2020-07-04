@@ -1,0 +1,53 @@
+{
+{
+"Type": "Authorisation",
+"Data": {
+		"Username":"Tom"
+		"Password":"Tom"
+	}
+}
+
+{
+"Type": "UserJoinedChannel",
+"Data": {
+		"User":"Tom",
+		"Channel":"#Test-Channel"
+	}
+}
+
+{
+"Type": "UserLeftChannel",
+"Data": {
+		"User":""
+		"LeftType":""
+	}
+}
+
+{
+"Type": "UserConnect",
+"Data": {}
+}
+
+{
+"Type": "UserDisconnect",
+"Data": {}
+}
+
+{
+"Type": "SentMessage",
+"Data": {
+		"Date":Epoch,
+		"Message":""
+		"From": "User"
+		"Receipent": "#Channel" || "User"}
+}
+
+{
+"Type": "ReceivedMessages",
+"Data": {
+		"Date":Epoch,
+		"Message":""
+		"From": "User"
+		"Receipent": "#Channel" || "User"}
+}
+}
