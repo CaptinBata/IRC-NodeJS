@@ -17,9 +17,8 @@ router.post('/authenticate', async function (req, res, next) {
 
   let result = await req.ircClient.authorise({ "username": txtUserName, "password": txtPassword })
 
-  res.render('login', {
-    "failed": result != 0 ? true : false, //If result is not 0, return true, else return false
-  });
+  result == 0 ? res.redirect("/irc") : res.render('login', { "failed": true });
+  //If result is 0 (Authenticated), then go to irc page, else go back to login. More checks can be placed here in the future for logging, and other return codes
 
 });
 

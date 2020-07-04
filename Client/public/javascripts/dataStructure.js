@@ -1,4 +1,4 @@
-function makeStruct(names) {
+function makeClass(names) {
     var count = names.length;
     return class {
         constructor(data) {
@@ -8,14 +8,14 @@ function makeStruct(names) {
     };
 }
 
-let AuthorisationRequest = makeStruct(["username", "password"])
-let AuthorisationResponse = makeStruct(["statusCode"])
-let UserJoinedChannel = makeStruct(["user", "channel"])
-let UserLeftChannel = makeStruct(["user", "leftType"])
-let UserConnect = makeStruct([])
-let UserDisconnect = makeStruct([])
-let SentMessage = makeStruct(["date", "message", "to", "from"])
-let ReceivedMessages = makeStruct(["date", "message", "to", "from"])
+let AuthorisationRequest = makeClass(["username", "password"])
+let AuthorisationResponse = makeClass(["statusCode"])
+let UserJoinedChannel = makeClass(["user", "channel"])
+let UserLeftChannel = makeClass(["user", "leftType"])
+let UserConnect = makeClass([])
+let UserDisconnect = makeClass([])
+let SentMessage = makeClass(["date", "message", "to", "from"])
+let ReceivedMessages = makeClass(["date", "message", "to", "from"])
 
 modules.exports = {
     AuthorisationRequest,
