@@ -7,11 +7,11 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var ircRouter = require('./routes/irc');
-var irc = require("irc")
-var messageStructure = require("./public/javascripts/messageStructure")
+var MessageStructure = require("./public/javascripts/messageStructure");
+const IRC = require('./public/javascripts/ircClient');
 
-let messagesList = [new messageStructure(new Date(Date.now()), "Test1", "Nyk1", "Someone1").getMessage()];
-let ircClient = new irc.Client("82.13.124.97:6667", "Nyk", { channels: ['#test-channel'] })
+let ircClient = new IRC("ws://82.13.124.97");
+let messagesList = [new MessageStructure(new Date(Date.now()), "Test1", "Nyk1", "Someone1").getMessage()];
 let username = "Nyk"
 
 var app = express();
@@ -36,13 +36,6 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/irc', ircRouter);
-
-ircClient.addListener("message", function (from, to, message) {
-  let newMessage = new messageStructure(new Date(Date.now()), message, from, to).getMessage()
-  console.log(newMessage);
-  messagesList.push(newMessage)
-  ircRouter.handle(req, res, next)
-})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
