@@ -18,7 +18,7 @@ router.post('/authenticate', async function (req, res, next) {
   let result = await req.ircClient.authorise({ "username": txtUserName, "password": txtPassword })
 
   res.render('login', {
-    "failed": result,
+    "failed": result == 0 ? true : false, //If results is 0, return true, else return false
   });
 
 });
