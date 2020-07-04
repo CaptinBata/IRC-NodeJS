@@ -15,16 +15,11 @@ router.post('/authenticate', async function (req, res, next) {
   let txtUserName = req.body.username;
   let txtPassword = req.body.password;
 
-  if (txtUserName == 'nyk' & txtPassword == 'test')
-  {
-    res.redirect("/irc")
-  }
-  else
-  {
-    res.render('login', {
-      "failed": true,
-    });
-  }
+  let result = await req.ircClient.authorise({ "username": txtUserName, "password": txtPassword })
+
+  res.render('login', {
+    "failed": result,
+  });
 
 });
 

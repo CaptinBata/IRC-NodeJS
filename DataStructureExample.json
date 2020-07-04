@@ -1,53 +1,59 @@
 {
 {
-"Type": "Authorisation",
+"Type": "authorisationRequest",
 "Data": {
-		"Username":"Tom"
-		"Password":"Tom"
+		"username":"Tom"
+		"password":"Tom"
 	}
 }
 
 {
-"Type": "UserJoinedChannel",
+"Type": "authorisationResponse",
 "Data": {
-		"User":"Tom",
-		"Channel":"#Test-Channel"
+		"statusCode":number}
+}
+
+{
+"Type": "userJoinedChannel",
+"Data": {
+		"user":"Tom",
+		"channel":"#Test-Channel"
 	}
 }
 
 {
-"Type": "UserLeftChannel",
+"Type": "userLeftChannel",
 "Data": {
-		"User":""
-		"LeftType":""
+		"user":""
+		"leftType":""
 	}
 }
 
 {
-"Type": "UserConnect",
+"Type": "userConnect",
 "Data": {}
 }
 
 {
-"Type": "UserDisconnect",
+"Type": "userDisconnect",
 "Data": {}
 }
 
 {
-"Type": "SentMessage",
+"Type": "sentMessage",
 "Data": {
-		"Date":Epoch,
-		"Message":""
-		"From": "User"
-		"Receipent": "#Channel" || "User"}
+		"date":Epoch,
+		"message":""
+		"from": "User"
+		"receipent": "#Channel" || "User"}
 }
 
 {
-"Type": "ReceivedMessages",
+"Type": "receivedMessages",
 "Data": {
-		"Date":Epoch,
-		"Message":""
-		"From": "User"
-		"Receipent": "#Channel" || "User"}
+		"date":Epoch,
+		"message":""
+		"from": "User"
+		"receipent": "#Channel" || "User"}
 }
 }
