@@ -30,7 +30,9 @@
 
 // The ASIO_STANDALONE define is necessary to use the standalone version of Asio.
 // Remove if you are using Boost Asio.
-#define ASIO_STANDALONE
+
+//(Tom: WE ARE, disable this)
+//#define ASIO_STANDALONE
 
 #include "websocketpp/config/asio_no_tls.hpp"
 #include "websocketpp/server.hpp"
