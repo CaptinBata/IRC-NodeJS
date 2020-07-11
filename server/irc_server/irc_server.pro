@@ -22,8 +22,6 @@ DISTFILES += \
     lib/libboost_thread-mgw8-mt-x32-1_73.a \ \
     websocketpp/CMakeLists.txt
 
-LIBS += -L../lib/ -llibboost_thread-mgw8-mt-d-x32-1_73
-
 HEADERS += \
     boost/assert/source_location.hpp \
     boost/config/abi/borland_prefix.hpp \
@@ -458,3 +456,6 @@ HEADERS += \
     websocketpp/utf8_validator.hpp \
     websocketpp/utilities.hpp \
     websocketpp/version.hpp
+
+LIBS += -L$$PWD/lib/ -llibboost_thread-mgw8-mt-d-x32-1_73 \
+        -L$$PWD/lib/ -llibboost_thread-mgw8-mt-x32-1_73
