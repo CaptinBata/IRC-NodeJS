@@ -32,10 +32,11 @@
 // Remove if you are using Boost Asio.
 
 //(Tom: WE ARE, disable this)
-//#define ASIO_STANDALONE
+//#define ASIO_STANDALONE 1
 
 #include "websocketpp/config/asio_no_tls.hpp"
 #include "websocketpp/server.hpp"
+//#include <boost/asio/impl/src.hpp>
 
 #include <functional>
 
