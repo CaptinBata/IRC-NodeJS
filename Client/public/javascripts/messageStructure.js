@@ -1,17 +1,17 @@
 class MessageStructure {
     constructor(date, message, from, recepient) {
-        this.MessageDate = date;
-        this.Message = message;
-        this.Sender = from;
-        this.Recepient = recepient;
+        this.messageDate = date;
+        this.message = message;
+        this.sender = from;
+        this.recepient = recepient;
     }
 
     getMessage() {
         return {
-            "Date": this.MessageDate.toUTCString(),
-            "Message": this.Message,
-            "From": this.Sender,
-            "To": this.Recepient
+            "Date": this.messageDate.toUTCString(),
+            "Message": this.message,
+            "From": this.sender,
+            "To": this.recepient
         }
     }
 }
