@@ -15,7 +15,7 @@ let UserLeftChannel = makeClass(["user", "leftType"])
 let UserConnect = makeClass([])
 let UserDisconnect = makeClass([])
 let SentMessage = makeClass(["date", "message", "to", "from"])
-let ReceivedMessages = makeClass(["date", "message", "to", "from"])
+let ReceivedMessage = makeClass(["date", "message", "to", "from"])
 
 module.exports = {
     AuthorisationRequest,
@@ -25,6 +25,6 @@ module.exports = {
     UserConnect,
     UserDisconnect,
     SentMessage,
-    ReceivedMessages
+    ReceivedMessage
 }
 

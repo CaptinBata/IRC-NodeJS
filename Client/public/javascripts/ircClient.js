@@ -1,11 +1,11 @@
 const WebSocket = require("ws")
-const { AuthorisationRequest, AuthorisationResponse } = require("./dataStructure");
-const { json } = require("express");
+const { SentMessage, AuthorisationRequest, AuthorisationResponse } = require("./dataStructure");
 
 class IRCClient {
 
-    constructor(address) {
+    constructor(address, userName) {
         this.address = address;
+        this.userName = userName
         this.ws = new WebSocket(address);
 
         this.setupListeners();
@@ -16,14 +16,18 @@ class IRCClient {
             console.log("I have connected!")
         });
 
-        this.ws.on('message', (data) => {
+        this.ws.on('receiveMessage', (data) => {
             console.log(data);
         });
     }
 
+    sendMessage(recipient, message) {
+        this.ws.emit("sendMessage", new SentMessage(new Date(Date.now()), message, recipient, this.userName))
+    }
+
     async authorise(data) {
         let eventRequestData = new AuthorisationRequest(data)
-        this.ws.emit("authorisationRequest", JSON.stringify(eventRequestData)) //Test this works
+        this.ws.emit("authorisationRequest", eventRequestData) //Test this works
 
         return new Promise((resolve, reject) => {
             this.ws.once('authorisationResponse', (data) => {
