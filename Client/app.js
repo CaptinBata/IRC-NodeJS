@@ -15,7 +15,7 @@ var ircRouter = require('./routes/irc');
 var MessageStructure = require("./public/javascripts/messageStructure");
 const IRC = require('./public/javascripts/ircClient');
 
-let ircClient = new IRC("ws://82.20.129.212");
+//let ircClient = new IRC("ws://82.20.129.212");
 let messagesList = [new MessageStructure(new Date(Date.now()), "Test1", "Nyk1", "Someone1").getMessage()];
 let username = "Nyk"
 
@@ -32,7 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function (req, res, next) {
-  req.ircClient = ircClient;
+//  req.ircClient = ircClient;
   req.messagesList = messagesList;
   req.username = username
   next();

@@ -17,7 +17,7 @@ let UserDisconnect = makeClass([])
 let SentMessage = makeClass(["date", "message", "to", "from"])
 let ReceivedMessages = makeClass(["date", "message", "to", "from"])
 
-modules.exports = {
+module.exports = {
     AuthorisationRequest,
     AuthorisationResponse,
     UserJoinedChannel,
