@@ -1,0 +1,19 @@
+{
+  "name": "irc_server",
+  "version": "1.0.0",
+  "description": "The server component of the accompanying client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaptinBata/IRC-NodeJS.git"
+  },
+  "author": "Nykolas Bata, Tom McIntosh, Kieran Essel, Abbas Ali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CaptinBata/IRC-NodeJS/issues"
+  },
+  "homepage": "https://github.com/CaptinBata/IRC-NodeJS#readme"
+}
