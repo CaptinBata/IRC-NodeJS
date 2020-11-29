@@ -2,5 +2,5 @@
 
 const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessage } = require('./dataStructure')
 
-let something = new AuthorisationResponse({ statusCode: 100 })
+let something = new AuthorisationResponse({ statusCode: 1000000 })
 console.log(something.json());
