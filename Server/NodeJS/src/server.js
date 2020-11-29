@@ -13,6 +13,10 @@ class Server {
             this.clients.push(new ircClient("", client));
             this.setupListenersForClient(client);
         })
+
+        this.server.on('close', (client) => {
+            console.log("The following client disconnected: ", client)
+        })
     }
 
     setupListenersForClient(client) {
@@ -48,7 +52,7 @@ class Server {
 
             if (userClient != null) {
                 //loop through all other clients and send message of disconnect
-                this.clients.splice(this.clients.indexOf(userClient), 1); //remove client from list of users
+                this.clients[this.clients.indexOf(userClient)].removeUsername(); //remove username from client in list
             }
         })
 
