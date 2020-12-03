@@ -25,5 +25,5 @@ class ircClientDetails {
 }
 
 module.exports = {
-    ircClient
+    ircClientDetails
 }

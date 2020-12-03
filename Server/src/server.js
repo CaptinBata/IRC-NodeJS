@@ -1,5 +1,5 @@
 const WebSocket = require('ws');
-const { ircClient } = require('./ircClientDetails')
+const { ircClientDetails } = require('./ircClientDetails')
 const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessage } = require('../../Utils/dataStructure')
 
 class Server {
@@ -15,7 +15,7 @@ class Server {
 
     setupListeners() {
         this.server.on('connection', (client) => {
-            this.clients.push(new ircClient("", client));
+            this.clients.push(new ircClientDetails("", client));
             this.setupListenersForClient(client);
         })
 
@@ -65,3 +65,4 @@ class Server {
 
 }
 
+module.exports = Server
