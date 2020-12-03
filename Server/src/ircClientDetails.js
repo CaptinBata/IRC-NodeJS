@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 
-class ircClient {
+class ircClientDetails {
     constructor(username, client) {
         this.username = username;
         this.client = client

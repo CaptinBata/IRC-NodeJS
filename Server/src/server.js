@@ -1,11 +1,16 @@
 const WebSocket = require('ws');
-const { ircClient } = require('./ircClient')
+const { ircClient } = require('./ircClientDetails')
 const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessage } = require('../../Utils/dataStructure')
 
 class Server {
     constructor() {
         this.clients = [];
+        this.server = null;
+    }
+
+    start() {
         this.server = new WebSocket.Server({ port: 8080 });
+        this.setupListeners();
     }
 
     setupListeners() {

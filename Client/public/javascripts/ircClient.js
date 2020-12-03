@@ -1,5 +1,5 @@
 const WebSocket = require("ws")
-const { SentMessage, AuthorisationRequest, AuthorisationResponse } = require("../../../Utils/dataStructure");
+const { SentMessage, AuthorisationRequest, AuthorisationResponse, ReceivedMessage } = require("../../../Utils/dataStructure");
 
 class IRCClient {
 
@@ -21,8 +21,8 @@ class IRCClient {
         });
     }
 
-    sendMessage(recipient, message) {
-        this.ws.emit("sendMessage", new SentMessage(new Date(Date.now()), message, recipient, this.userName))
+    async sendMessage(recipient, message) {
+        this.ws.emit("sentMessage", new SentMessage(new Date(Date.now()), message, recipient, this.userName))#
     }
 
     async authorise(data) {
