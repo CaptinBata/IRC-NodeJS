@@ -1,6 +1,6 @@
 const WebSocket = require('ws');
 const { ircClient } = require('./ircClient')
-const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessage } = require('./utils/dataStructure')
+const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessage } = require('../../Utils/dataStructure')
 
 class Server {
     constructor() {

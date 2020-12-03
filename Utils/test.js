@@ -2,5 +2,17 @@
 
 const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessage } = require('./dataStructure')
 
-let something = new AuthorisationResponse({ statusCode: 1000000 })
-console.log(something.json());
+class One {
+    delete = false;
+}
+
+class Two {
+    delete = false;
+}
+
+list = [new One(), new One(), new Two()]
+
+userJoins = list.filter(element => element instanceof Two)
+userJoins[0].delete = true;
+
+console.log(list[2].delete)

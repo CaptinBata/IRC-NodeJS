@@ -1,5 +1,5 @@
 const WebSocket = require("ws")
-const { SentMessage, AuthorisationRequest, AuthorisationResponse } = require("./dataStructure");
+const { SentMessage, AuthorisationRequest, AuthorisationResponse } = require("../../../Utils/dataStructure");
 
 class IRCClient {
 
