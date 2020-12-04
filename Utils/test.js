@@ -2,17 +2,7 @@
 
 const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessage } = require('./dataStructure')
 
-class One {
-    delete = false;
-}
 
-class Two {
-    delete = false;
-}
+let authRequest = new AuthorisationRequest({ username: "Nyk", password: "Nah" })
 
-list = [new One(), new One(), new Two()]
-
-userJoins = list.filter(element => element instanceof Two)
-userJoins[0].delete = true;
-
-console.log(list[2].delete)
+console.log(authRequest.json())

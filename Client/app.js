@@ -12,7 +12,7 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var ircRouter = require('./routes/irc');
 
-var MessageStructure = require("./public/javascripts/messageStructure");
+var MessageStructure = require("../Utils/messageStructure");
 const IRC = require('./public/javascripts/ircClient');
 
 let username = "Nyk"

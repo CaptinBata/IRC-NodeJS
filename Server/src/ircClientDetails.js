@@ -11,6 +11,14 @@ class ircClientDetails {
         this.username = username;
     }
 
+    getUsername() {
+        return this.username
+    }
+
+    getWebSocketClient() {
+        return this.client;
+    }
+
     removeUsername() {
         this.username = "";
     }

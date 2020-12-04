@@ -1,5 +1,5 @@
 const express = require('express');
-const MessageStructure = require('../public/javascripts/messageStructure');
+const MessageStructure = require('../../Utils/messageStructure');
 const router = express.Router();
 
 /* GET home page. */

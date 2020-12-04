@@ -16,7 +16,7 @@ class IRCClient {
             console.log("I have connected!")
         });
 
-        this.ws.on('receiveMessage', (data) => {
+        this.ws.on('receivedMessage', (data) => {
             console.log(data);
         });
     }
@@ -28,6 +28,7 @@ class IRCClient {
     async authorise(data) {
         let eventRequestData = new AuthorisationRequest(data)
         this.ws.emit("authorisationRequest", eventRequestData) //Test this works
+        console.log("Emitted authorisationRequest event")
 
         return new Promise((resolve, reject) => {
             this.ws.once('authorisationResponse', (data) => {

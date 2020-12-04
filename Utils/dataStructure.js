@@ -1,4 +1,4 @@
-function makeClass(names) {
+function makeClass(type, names) {
     return class {
         constructor(data) {
             for (const name of names)
@@ -6,23 +6,26 @@ function makeClass(names) {
         }
 
         json() { //made incase we can't send class instances across a websocket
-            let jsonObject = {};
+            let jsonObject = {
+                type: type,
+                data: {}
+            };
             for (const name of names) {
-                jsonObject[name] = this[name]
+                jsonObject.data[name] = this[name]
             }
             return jsonObject;
         }
     };
 }
 
-let AuthorisationRequest = makeClass(["username", "password"])
-let AuthorisationResponse = makeClass(["statusCode"])
-let UserJoinedChannel = makeClass(["user", "channel"])
-let UserLeftChannel = makeClass(["user", "leftType"])
-let UserConnect = makeClass(["username"])
-let UserDisconnect = makeClass(["username"])
-let SentMessage = makeClass(["date", "message", "to", "from"])
-let ReceivedMessage = makeClass(["date", "message", "to", "from"])
+let AuthorisationRequest = makeClass("AuthorisationRequest", ["username", "password"])
+let AuthorisationResponse = makeClass("AuthorisationResponse", ["statusCode"])
+let UserJoinedChannel = makeClass("UserJoinedChannel", ["user", "channel"])
+let UserLeftChannel = makeClass("UserLeftChannel", ["user", "leftType"])
+let UserConnect = makeClass("UserConnect", ["username"])
+let UserDisconnect = makeClass("UserDisconnect", ["username"])
+let SentMessage = makeClass("SentMessage", ["date", "message", "to", "from"])
+let ReceivedMessage = makeClass("ReceivedMessage", ["date", "message", "to", "from"])
 
 module.exports = {
     AuthorisationRequest,
