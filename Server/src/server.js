@@ -4,13 +4,18 @@ const { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeft
 
 class Server {
     constructor() {
+        console.log("Intialising Server")
         this.clients = [];
         this.server = null;
+        console.log("Server Intialised")
     }
 
     start() {
+        console.log("Starting Server")
         this.server = new WebSocket.Server({ port: 8080 });
+        console.log("Setting up listeners")
         this.setupListeners();
+        console.log("Server started successfully")
     }
 
     setupListeners() {

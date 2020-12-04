@@ -21,8 +21,8 @@ class IRCClient {
         });
     }
 
-    async sendMessage(recipient, message) {
-        this.ws.emit("sentMessage", new SentMessage(new Date(Date.now()), message, recipient, this.userName))#
+    sendMessage(recipient, message) {
+        this.ws.emit("sentMessage", new SentMessage(new Date(Date.now()), message, recipient, this.userName))
     }
 
     async authorise(data) {
