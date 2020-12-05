@@ -31,7 +31,9 @@ class Server {
     }
 
     parseData(clientData) {
-        switch (clientData.type) {
+        let jsonObj = JSON.parse(clientData)
+
+        switch (jsonObj.type) {
             case "AuthorisationRequest": return new AuthorisationRequest(clientData.data);
             case "UserJoinedChannel": return new UserJoinedChannel(clientData.data);
             case "UserLeftChannel": return new UserLeftChannel(clientData.data);
@@ -44,7 +46,7 @@ class Server {
     setupListenersForClient(client) {
         client.on('message', (clientData) => {
             console.log("Received Request:", clientData)
-            let dataType = this.parseData(JSON.parse(clientData));
+            let dataType = this.parseData(clientData);
             console.log("Parsed Request:", { type: typeof dataType, data: dataType })
 
             console.log("Executing Request!")

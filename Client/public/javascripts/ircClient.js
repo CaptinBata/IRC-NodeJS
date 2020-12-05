@@ -23,7 +23,7 @@ class IRCClient {
 
     processIncomingRequest(data) {
         //change this to deal with incoming messages etc
-        let dataObj = this.parseData(JSON.parse(data));
+        let dataObj = this.parseData(data);
 
         switch (dataObj.constructor) {
             case ReceivedMessage: this.processSentMessage(dataObj); break;
@@ -49,7 +49,9 @@ class IRCClient {
     }
 
     parseData(clientData) {
-        switch (clientData.type) {
+        let jsonObj = JSON.parse(clientData)
+        
+        switch (jsonObj.type) {
             case "AuthorisationResponse": return new AuthorisationResponse(clientData.data);
             case "ReceivedMessage": return new ReceivedMessage(clientData.data);
         }
@@ -61,7 +63,7 @@ class IRCClient {
 
         return new Promise((resolve, reject) => {
             this.ws.once('message', (data) => {
-                let authResponse = this.parseData(JSON.parse(data));
+                let authResponse = this.parseData(data);
                 resolve(authResponse.json())
             })
         });
