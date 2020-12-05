@@ -30,53 +30,38 @@ class Server {
         })
     }
 
-    setupListenersForClient(client) {
-        client.addListener('authorisationRequest', (authRequestData) => {
-            console.log("I received auth request!", authRequestData)
-            //do some actual auth here for the login user
-            client.emit('authorisationResponse', new AuthorisationResponse({ statusCode: 0 })) //auth
-        })
-
-        client.addEventListener('userJoinedChannel', (userJoinedChannelData) => {
-            //add user to specific requested channel
-        })
-
-        client.addEventListener('userLeftChannel', (userLeftChannelData) => {
-            //remove user from specific requested channel
-        })
-
-        client.addEventListener('userConnect', (userConnectData) => {
-            //user has succesfully logged into server, send message to all channels their apart of that they are online.
-            let username = userConnectData.username;
-            this.clients[this.clients.indexOf(client)].setUsername(username);
-        })
-
-        client.addEventListener('userDisconnect', (userDisconnectData) => {
-            //user has succesfully logged out of server, send message to all channels their apart of that they are offline.
-            let username = userDisconnectData.username;
-            let userClient = null;
-
-            this.clients.forEach(client => {
-                if (client.username == username)
-                    userClient = client;
-            })
-
-            if (userClient != null) {
-                //loop through all other clients and send message of disconnect
-                this.clients[this.clients.indexOf(userClient)].removeUsername(); //remove username from client in list
-            }
-        })
-
-        client.addEventListener('sentMessage', (sentMessageData) => {
-            let recipient = sentMessageData.to; //add check for DM or channel message
-            this.clients.filter(element => element.getWebSocketClient() != client &&
-                client.getUsername() == recipient).forEach(otherClient => { //filter and get all connected clients that are not the one sending the message and the recipient
-                    otherClient.emit('receivedMessage', sentMessageData)
-                })
-        })
-
+    parseData(clientData) {
+        switch (clientData.type) {
+            case "AuthorisationRequest": return new AuthorisationRequest(clientData.data);
+            case "UserJoinedChannel": return new UserJoinedChannel(clientData.data);
+            case "UserLeftChannel": return new UserLeftChannel(clientData.data);
+            case "UserConnect": return new UserConnect(clientData.data);
+            case "UserDisconnect": return new UserDisconnect(clientData.data);
+            case "SentMessage": return new SentMessage(clientData.data);
+        }
     }
 
+    setupListenersForClient(client) {
+        client.on('message', (clientData) => {
+            dataType = this.parseData(clientData);
+
+            switch (dataType) {
+                case AuthorisationRequest: processAuthorisationRequest(dataType);
+                case UserJoinedChannel: processUserJoinedChannel(dataType);
+                case UserLeftChannel: processUserLeftChannel(dataType);
+                case UserConnect: processUserConnect(dataType);
+                case UserDisconnect: processUserDisconnect(dataType);
+                case SentMessage: processSentMessage(dataType);
+            }
+        })
+    }
+
+    processSentMessage(sentMessageData) {
+        let recipient = sentMessageData.to; //add check for DM or channel message
+        this.clients.forEach(client => {
+            client.send(new ReceivedMessage(sentMessageData.json().data).json()) //This is ugly, will change later - Nyk 5/12/20
+        })
+    }
 }
 
 module.exports = Server
