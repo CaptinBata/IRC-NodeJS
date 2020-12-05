@@ -4,15 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// var { AuthorisationRequest, AuthorisationResponse, UserJoinedChannel, UserLeftChannel, UserConnect, UserDisconnect, SentMessage, ReceivedMessages } = require("./public/javascripts/dataStructure")
+// let test = new AuthorisationRequest("Test1", "Test2")
+// test.Username - This is an example of importing and using the data structure factory. Ask if you big confuse - Nyk
+
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var ircRouter = require('./routes/irc');
-var MessageStructure = require("./public/javascripts/messageStructure");
+
+var MessageStructure = require("../Utils/messageStructure");
 const IRC = require('./public/javascripts/ircClient');
 
-let ircClient = new IRC("ws://82.13.124.97");
-let messagesList = [new MessageStructure(new Date(Date.now()), "Test1", "Nyk1", "Someone1").getMessage()];
 let username = "Nyk"
+let ircClient = new IRC("ws://localhost:8080", username);
+let messagesList = [new MessageStructure(new Date(Date.now()), "Test1", username, "Someone1").getMessage()];
+
 
 var app = express();
 
