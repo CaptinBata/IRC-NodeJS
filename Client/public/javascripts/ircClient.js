@@ -1,3 +1,4 @@
+const { json } = require("express");
 const WebSocket = require("ws")
 const { SentMessage, AuthorisationRequest, AuthorisationResponse, ReceivedMessage } = require("../../../Utils/dataStructure");
 
@@ -16,21 +17,40 @@ class IRCClient {
         });
 
         this.ws.on('message', (data) => {
-            console.log(data);
+            this.processIncomingRequest(data)
         });
     }
 
+    processIncomingRequest(data) {
+        //change this to deal with incoming messages etc
+        let dataObj = this.parseData(JSON.parse(data));
+
+        switch (dataObj.constructor) {
+            case ReceivedMessage: this.processSentMessage(dataObj); break;
+            default:
+                console.log("Could not find request type. Stopping request execution");
+                break;
+        }
+    }
+
+    processSentMessage(dataObj) {
+        //Figure out how to display on front page here
+        console.log(dataObj.json());
+    }
+
     _sendMessageToWebsocket(data) {
-        this.ws.send("message", data)
+        this.ws.send(JSON.stringify(data));
     }
 
     sendMessage(recipient, message) {
-        this._sendMessageToWebsocket(new SentMessage(new Date(Date.now()), message, recipient, this.userName).json())
+        let messageToSend = new SentMessage({ date: new Date(Date.now()), message: message, to: recipient, from: this.userName }).json();
+        console.log("Sending message:", messageToSend)
+        this._sendMessageToWebsocket(messageToSend)
     }
 
     parseData(clientData) {
         switch (clientData.type) {
-            case "AuthorisationResponse": return new AuthorisationRequest(clientData.data);
+            case "AuthorisationResponse": return new AuthorisationResponse(clientData.data);
             case "ReceivedMessage": return new ReceivedMessage(clientData.data);
         }
     }
@@ -40,9 +60,9 @@ class IRCClient {
         console.log("Sent authorisationRequest")
 
         return new Promise((resolve, reject) => {
-            this.ws.once('authorisationResponse', (data) => {
-                let eventResponseData = new AuthorisationResponse(data.data)
-                resolve(eventResponseData.statusCode)
+            this.ws.once('message', (data) => {
+                let authResponse = this.parseData(JSON.parse(data));
+                resolve(authResponse.json())
             })
         });
     }

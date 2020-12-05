@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 router.post('/sendmessage', function (req, res, next) {
   let message = req.body.message;
   req.messagesList.push(new MessageStructure(new Date(Date.now()), message, req.username, "#test-channel").getMessage())
-  // req.ircClient.say("#test-channel", message)
+  req.ircClient.sendMessage("#test-channel", message)
   res.redirect('/irc')
 });
 

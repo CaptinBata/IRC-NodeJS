@@ -19,7 +19,7 @@ function makeClass(type, names) {
 }
 
 let AuthorisationRequest = makeClass("AuthorisationRequest", ["username", "password"])
-let AuthorisationResponse = makeClass("AuthorisationResponse", ["statusCode"])
+let AuthorisationResponse = makeClass("AuthorisationResponse", ["statusCode", "body"])
 let UserJoinedChannel = makeClass("UserJoinedChannel", ["user", "channel"])
 let UserLeftChannel = makeClass("UserLeftChannel", ["user", "leftType"])
 let UserConnect = makeClass("UserConnect", ["username"])
