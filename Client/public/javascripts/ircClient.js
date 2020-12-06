@@ -28,7 +28,7 @@ class IRCClient {
         switch (dataObj.constructor) {
             case ReceivedMessage: this.processSentMessage(dataObj); break;
             default:
-                console.log("Could not find request type. Stopping request execution");
+                console.log(`Could not find request type: ${data.constructor}. Stopping request execution`);
                 break;
         }
     }

@@ -19,14 +19,13 @@ class Server {
     }
 
     setupListeners() {
-        this.server.on('connection', (client) => {
-            console.log("Client has connected!", client)
-            this.clients.push(new ircClientDetails("", client));
-            this.setupListenersForClient(client);
+        this.server.on('connection', (wsClient) => {
+            this.clients.push(new ircClientDetails("", wsClient));
+            this.setupListenersForClient(wsClient);
         })
 
-        this.server.on('close', (client) => {
-            console.log("The following client disconnected: ", client)
+        this.server.on('close', (wsClient) => {
+            console.log("A client disconnected")
         })
     }
 
@@ -45,11 +44,7 @@ class Server {
 
     setupListenersForClient(client) {
         client.on('message', (clientData) => {
-            console.log("Received Request:", clientData)
             let dataType = this.parseData(clientData);
-            console.log("Parsed Request:", { type: typeof dataType, data: dataType })
-
-            console.log("Executing Request!")
 
             switch (dataType.constructor) {
                 case AuthorisationRequest: this.processAuthorisationRequest(client, dataType); break;
@@ -59,19 +54,17 @@ class Server {
                 case UserDisconnect: this.processUserDisconnect(client, dataType); break;
                 case SentMessage: this.processSentMessage(client, dataType); break;
                 default:
-                    console.log("Could not find request type. Stopping request execution");
+                    console.log(`Could not find request type: ${dataType.constructor}. Stopping request execution`);
                     break;
             }
         })
     }
 
     _sendMessageToWebsocket(client, data) {
-        console.log("Sending data back to client:", data)
         client.send(JSON.stringify(data));
     }
 
     processSentMessage(sendingClient, sentMessageData) {
-        console.log("Executing SentMessage Request")
         let recipient = sentMessageData.to; //add check for DM or channel message
         this.clients/*.filter(otherClient => otherClient.getWebSocketClient() != sendingClient)*/ //Use this for when actually sending to other clients that are not the sending one. Used for testing atm
             .forEach(client => {
@@ -80,7 +73,6 @@ class Server {
     }
 
     processAuthorisationRequest(sendingClient, authRequestData) {
-        console.log("Executing AuthorisationRequest")
         //do auth check here
         this._sendMessageToWebsocket(sendingClient, new AuthorisationResponse({ statusCode: 200, body: "Ok" }).json())
     }
